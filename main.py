@@ -1,10 +1,23 @@
 import time
-my_time = int(input("Enter the time in seconds: "))
+from datetime import datetime
+my_time = input("Enter (q to quit): ")
 
-for x in (range(0, my_time + 1)):
-    seconds = x % 60
-    minutes = int (x / 60) % 60
-    hours = int(x / 3600)
-    print(f"{hours:02}:{minutes:02}:{seconds:02}")
+while not my_time =="q":
+
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    current_time_frame = current_time.split(":")
+
+    current_hour = int(current_time_frame[0])
+    current_minutes = int(current_time_frame[1])
+    current_seconds = int(current_time_frame[2])
+    start_time = current_hour * 3600 + (current_minutes * 60) + current_seconds
+
+    seconds = start_time % 60
+    minutes = int (start_time / 60) % 60
+    hours = int(start_time / 3600)
+    if hours >= 24:
+         hours = hours % 24
     time.sleep(1)
-print("Time's Up!")
+    start_time = +1
+    print(f"{hours:02}:{minutes:02}:{seconds:02}")
